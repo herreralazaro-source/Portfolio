@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lázaro Herrera Jiménez — Analista de Ciberseguridad en Formación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Hebrew:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #EEF1F4;
+    --panel: #FFFFFF;
+    --ink: #12161B;
+    --ink-soft: #4A535C;
+    --navy: #122A4D;
+    --navy-deep: #0B1930;
+    --amber: #DE9F32;
+    --amber-soft: #F3E3C4;
+    --teal: #276358;
+    --teal-soft: #DCEAE6;
+    --line: #D5DBE1;
+    --radius: 2px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3{
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .mono{ font-family: 'IBM Plex Mono', monospace; }
+  a{ color: inherit; }
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(238,241,244,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content: space-between;
+    height: 62px;
+  }
+  .brand{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-decoration:none;
+    color: var(--navy);
+  }
+  .navlinks{ display:flex; gap: 26px; align-items:center; }
+  .navlinks a{
+    font-size: 13px;
+    text-decoration:none;
+    color: var(--ink-soft);
+    font-weight:500;
+  }
+  .navlinks a:hover{ color: var(--navy); }
+  .status-pill{
+    display:flex; align-items:center; gap:7px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    padding: 5px 10px;
+    background: var(--amber-soft);
+    color: #8A5A0E;
+    border-radius: var(--radius);
+  }
+  .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:#DE9F32;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:1; }
+    50%{ opacity: 0.35; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .dot{ animation:none; }
+  }
+
+  @media (max-width: 720px){
+    .navlinks a:not(.status-pill){ display:none; }
+  }
+
+  .lang-switch{ display:flex; gap:4px; }
+  .lang-btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 5px 9px;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    line-height:1;
+  }
+  .lang-btn:hover{ border-color: var(--navy); color: var(--navy); }
+  .lang-btn.active{ background: var(--navy); border-color: var(--navy); color:#fff; }
+
+  /* ---------- RTL / Hebrew ---------- */
+  html[dir="rtl"] body,
+  html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3{
+    font-family: 'Noto Sans Hebrew', 'IBM Plex Sans', sans-serif;
+  }
+  html[dir="rtl"] .mono,
+  html[dir="rtl"] .eyebrow,
+  html[dir="rtl"] .section-eyebrow,
+  html[dir="rtl"] .panel-title,
+  html[dir="rtl"] .status-tag,
+  html[dir="rtl"] .status-pill,
+  html[dir="rtl"] .rm-ts,
+  html[dir="rtl"] .level-label,
+  html[dir="rtl"] .brand,
+  html[dir="rtl"] .lang-btn,
+  html[dir="rtl"] .btn,
+  html[dir="rtl"] footer,
+  html[dir="rtl"] .cert-meta{
+    font-family: 'Noto Sans Hebrew', 'IBM Plex Mono', monospace;
+  }
+  html[dir="rtl"] .roadmap{ border-left:none; border-right: 2px solid var(--line); }
+  html[dir="rtl"] .roadmap li{ padding: 0 28px 30px 0; }
+  html[dir="rtl"] .roadmap li::before{ left:auto; right:-7px; }
+  html[dir="rtl"] .panel-row span:last-child{ text-align:left; }
+  html[dir="rtl"] .module-list .module-num{ margin-right:0; margin-left:12px; }
+  /* the log ticker stays LTR regardless of page direction, like a terminal/monitoring feed */
+  .ticker-caption, .ticker-outer, .ticker-track, .log-entry{ direction: ltr; text-align: left; }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding: 84px 0 56px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width: 22px; height:1px; background: var(--teal);
+    display:inline-block;
+  }
+  h1.name{
+    font-size: clamp(34px, 6vw, 56px);
+    font-weight: 700;
+    color: var(--navy-deep);
+  }
+  .role{
+    font-size: clamp(17px, 2.4vw, 21px);
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin-top: 10px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+    margin-top: 34px;
+    align-items: start;
+  }
+  @media (max-width: 780px){
+    .hero-grid{ grid-template-columns: 1fr; }
+  }
+  .hero-text p{
+    font-size: 15.5px;
+    color: var(--ink);
+    max-width: 52ch;
+  }
+  .cta-row{ display:flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 13px;
+    padding: 11px 18px;
+    border-radius: var(--radius);
+    text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+    border: 1px solid transparent;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+  .btn-primary{ background: var(--navy); color: #fff; }
+  .btn-primary:hover{ background: var(--navy-deep); }
+  .btn-ghost{ border-color: var(--navy); color: var(--navy); }
+  .btn-ghost:hover{ background: var(--navy); color:#fff; }
+
+  .panel{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+  }
+  .panel .panel-title{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+  .panel-row{
+    display:flex; justify-content: space-between;
+    font-size: 13.5px;
+    padding: 7px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .panel-row:last-child{ border-bottom:none; }
+  .panel-row span:first-child{ color: var(--ink-soft); }
+  .panel-row span:last-child{ font-weight:600; text-align:right; }
+
+  /* ---------- TICKER (signature element) ---------- */
+  .ticker-caption{
+    max-width: 980px; margin: 0 auto; padding: 0 28px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .ticker-outer{
+    background: var(--navy-deep);
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 1px solid #223454;
+    border-bottom: 1px solid #223454;
+    padding: 13px 0;
+  }
+  .ticker-track{
+    display:inline-block;
+    animation: scroll-left 42s linear infinite;
+  }
+  .ticker-outer:hover .ticker-track{ animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{ animation: none; }
+    .ticker-outer{ overflow-x: auto; }
+  }
+  @keyframes scroll-left{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
+  .log-entry{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: #A9C3E8;
+    padding: 0 26px;
+    display:inline-block;
+  }
+  .log-entry .tag{ color: var(--amber); font-weight:500; }
+  .log-entry .ts{ color:#6F87AC; }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding: 70px 0; }
+  section.alt{ background: #E7EBEF; }
+  .section-head{ margin-bottom: 38px; }
+  .section-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .section-head h2{
+    font-size: clamp(24px, 3.4vw, 32px);
+    color: var(--navy-deep);
+  }
+
+  .brief-text{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+  @media (max-width: 720px){ .brief-text{ grid-template-columns:1fr; } }
+  .brief-text p{ font-size: 15.5px; margin: 0 0 14px; }
+
+  /* Training / certificate */
+  .cert-card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .cert-head{
+    padding: 22px 26px;
+    border-bottom: 1px solid var(--line);
+    display:flex; justify-content: space-between; align-items:center; flex-wrap:wrap; gap:10px;
+  }
+  .cert-head h3{ font-size: 19px; color: var(--navy-deep); }
+  .cert-head .cert-meta{ font-family:'IBM Plex Mono', monospace; font-size:12px; color: var(--ink-soft); }
+  .status-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: var(--radius);
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .status-done{ background: var(--teal-soft); color: var(--teal); }
+  .status-progress{ background: var(--amber-soft); color: #8A5A0E; }
+  .status-todo{ background: #EDEFF1; color: var(--ink-soft); }
+
+  .module-list{ list-style:none; margin:0; padding:0; }
+  .module-list li{
+    display:flex; justify-content: space-between; align-items:center;
+    padding: 14px 26px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14.5px;
+    gap: 12px;
+  }
+  .module-list li:last-child{ border-bottom:none; }
+  .module-list .module-num{
+    font-family:'IBM Plex Mono', monospace;
+    color: var(--ink-soft);
+    font-size: 12px;
+    margin-right: 12px;
+  }
+
+  /* Skills matrix */
+  .skills-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 780px){ .skills-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 520px){ .skills-grid{ grid-template-columns: 1fr; } }
+  .skill-card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+  .skill-card h4{
+    font-size: 14.5px; font-weight:600; margin:0 0 6px;
+    color: var(--ink);
+  }
+  .skill-card .skill-desc{ font-size: 12.5px; color: var(--ink-soft); margin-bottom: 12px; }
+  .level{ display:flex; gap:5px; align-items:center; }
+  .level .seg{ width: 20px; height:5px; background: var(--line); border-radius: 2px; }
+  .level .seg.on{ background: var(--teal); }
+  .level-label{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; color: var(--ink-soft); margin-left:8px; }
+
+  /* Roadmap */
+  .roadmap{ list-style:none; margin:0; padding:0; border-left: 2px solid var(--line); }
+  .roadmap li{
+    position: relative;
+    padding: 0 0 30px 28px;
+  }
+  .roadmap li:last-child{ padding-bottom:0; }
+  .roadmap li::before{
+    content:"";
+    position:absolute; left:-7px; top:2px;
+    width:12px; height:12px; border-radius:50%;
+    background: var(--panel);
+    border: 2px solid var(--amber);
+  }
+  .roadmap li.queued::before{ border-color: var(--ink-soft); }
+  .roadmap .rm-ts{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.03em;
+  }
+  .roadmap h4{ font-size: 15.5px; margin: 4px 0 4px; }
+  .roadmap p{ font-size: 13.5px; color: var(--ink-soft); margin:0; max-width: 56ch; }
+
+  /* Contact */
+  .contact-panel{
+    background: var(--navy-deep);
+    color: #EDF1F6;
+    border-radius: var(--radius);
+    padding: 44px;
+    display:flex; justify-content: space-between; align-items:center; flex-wrap:wrap; gap: 24px;
+  }
+  .contact-panel h2{ color:#fff; font-size: clamp(22px,3vw,28px); }
+  .contact-panel p{ color:#A9B7CB; font-size: 14px; margin-top:8px; max-width: 44ch;}
+  .contact-links{ display:flex; gap:12px; flex-wrap:wrap; }
+  .contact-links .btn-primary{ background:#fff; color: var(--navy-deep); }
+  .contact-links .btn-primary:hover{ background:#DDE5EE; }
+  .contact-links .btn-ghost{ border-color:#5C7091; color:#EDF1F6; }
+  .contact-links .btn-ghost:hover{ background:#1B3762; }
+
+  footer{
+    padding: 26px 0 40px;
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+  }
+
+  ::selection{ background: var(--amber-soft); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">L.HERRERA_JIMENEZ // PORTFOLIO</a>
+    <div class="navlinks">
+      <a href="#about" data-i18n="nav.about">Sobre mí</a>
+      <a href="#training" data-i18n="nav.training">Formación</a>
+      <a href="#skills" data-i18n="nav.skills">Habilidades</a>
+      <a href="#roadmap" data-i18n="nav.roadmap">Hoja de ruta</a>
+      <a href="#contact" data-i18n="nav.contact">Contacto</a>
+      <span class="status-pill"><span class="dot"></span><span data-i18n="nav.status">EN FORMACIÓN</span></span>
+      <div class="lang-switch">
+        <button type="button" class="lang-btn active" data-lang="es" onclick="applyLanguage('es')">ES</button>
+        <button type="button" class="lang-btn" data-lang="en" onclick="applyLanguage('en')">EN</button>
+        <button type="button" class="lang-btn" data-lang="he" onclick="applyLanguage('he')">HE</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="hero.eyebrow">Registro de analista · Estado: activo</div>
+    <h1 class="name">Lázaro Herrera Jiménez</h1>
+    <p class="role" data-i18n="hero.role">Analista de Ciberseguridad en Formación</p>
+
+    <div class="hero-grid">
+      <div class="hero-text">
+        <p data-i18n="hero.p1">Estoy construyendo mi base en ciberseguridad de forma metódica: redes, sistemas Linux, detección de incidentes y fundamentos de seguridad defensiva. No vengo con años de experiencia — vengo con constancia, curiosidad técnica y la disciplina de documentar cada cosa que aprendo.</p>
+        <p data-i18n="hero.p2">Este portfolio es, en sí mismo, parte de ese proceso: un registro vivo de mi formación que se irá actualizando módulo a módulo, laboratorio a laboratorio.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://www.linkedin.com/in/lazaro-herrera-jimenez-83485b394/?skipRedirect=true" target="_blank" rel="noopener" data-i18n="cta.linkedin">Conectar en LinkedIn ↗</a>
+          <a class="btn btn-ghost" href="mailto:herrera.lazaro@gmail.com" data-i18n="cta.email">Escribir un correo</a>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title" data-i18n="panel.title">Panel de estado</div>
+        <div class="panel-row"><span data-i18n="panel.label.program">Programa actual</span><span>Google Cybersecurity Cert.</span></div>
+        <div class="panel-row"><span data-i18n="panel.label.status">Estado</span><span data-i18n="panel.value.status">En curso</span></div>
+        <div class="panel-row"><span data-i18n="panel.label.focus">Enfoque</span><span>SOC / Blue Team</span></div>
+        <div class="panel-row"><span data-i18n="panel.label.milestone">Próximo hito</span><span>TryHackMe · Pre Security</span></div>
+        <div class="panel-row"><span data-i18n="panel.label.location">Ubicación</span><span data-i18n="panel.value.location">Israel</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker-caption" data-i18n="ticker.caption">// registro de aprendizaje — se actualiza a medida que avanzo</div>
+<div class="ticker-outer">
+  <div class="ticker-track">
+    <span class="log-entry"><span class="ts">[2026-06-05]</span> <span class="tag">MODULE_COMPLETE</span> :: Foundations of Cybersecurity</span>
+    <span class="log-entry"><span class="ts">[2026-06-12]</span> <span class="tag">MODULE_COMPLETE</span> :: Play It Safe — Manage Security Risks</span>
+    <span class="log-entry"><span class="ts">[2026-06-20]</span> <span class="tag">IN_PROGRESS</span> :: Connect and Protect — Networks &amp; Network Security</span>
+    <span class="log-entry"><span class="ts">[2026-06-20]</span> <span class="tag">TOOL_INTRO</span> :: Wireshark — <span data-i18n="ticker.wireshark">captura de paquetes</span></span>
+    <span class="log-entry"><span class="ts">[2026-07-01]</span> <span class="tag">CONCEPT</span> :: <span data-i18n="ticker.cia">Tríada CIA — confidencialidad / integridad / disponibilidad</span></span>
+    <span class="log-entry"><span class="ts">[PENDIENTE]</span> <span class="tag">QUEUED</span> :: Tools of the Trade — Linux &amp; SQL</span>
+    <span class="log-entry"><span class="ts">[PENDIENTE]</span> <span class="tag">QUEUED</span> :: <span data-i18n="ticker.homelab">Laboratorio casero — VirtualBox + Kali Linux</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="log-entry"><span class="ts">[2026-06-05]</span> <span class="tag">MODULE_COMPLETE</span> :: Foundations of Cybersecurity</span>
+    <span class="log-entry"><span class="ts">[2026-06-12]</span> <span class="tag">MODULE_COMPLETE</span> :: Play It Safe — Manage Security Risks</span>
+    <span class="log-entry"><span class="ts">[2026-06-20]</span> <span class="tag">IN_PROGRESS</span> :: Connect and Protect — Networks &amp; Network Security</span>
+    <span class="log-entry"><span class="ts">[2026-06-20]</span> <span class="tag">TOOL_INTRO</span> :: Wireshark — <span data-i18n="ticker.wireshark">captura de paquetes</span></span>
+    <span class="log-entry"><span class="ts">[2026-07-01]</span> <span class="tag">CONCEPT</span> :: <span data-i18n="ticker.cia">Tríada CIA — confidencialidad / integridad / disponibilidad</span></span>
+    <span class="log-entry"><span class="ts">[PENDIENTE]</span> <span class="tag">QUEUED</span> :: Tools of the Trade — Linux &amp; SQL</span>
+    <span class="log-entry"><span class="ts">[PENDIENTE]</span> <span class="tag">QUEUED</span> :: <span data-i18n="ticker.homelab">Laboratorio casero — VirtualBox + Kali Linux</span></span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow" data-i18n="about.eyebrow">Briefing</div>
+      <h2 data-i18n="about.title">Sobre mí</h2>
+    </div>
+    <div class="brief-text">
+      <p data-i18n="about.p1">Me acerqué a la ciberseguridad por una razón simple: me atrae entender cómo funcionan realmente los sistemas — y cómo se rompen. En lugar de esperar a tener "suficiente" experiencia para empezar a mostrar algo, decidí construir mi formación en público, documentando cada módulo, cada concepto y cada herramienta nueva.</p>
+      <p data-i18n="about.p2">Actualmente curso el <strong>Google Cybersecurity Professional Certificate</strong>, un programa orientado a fundamentos de seguridad defensiva: redes, sistemas Linux, bases de datos SQL, detección de incidentes y automatización básica con Python. Mi objetivo a corto plazo es un puesto junior en un SOC (Security Operations Center), donde pueda seguir aprendiendo con mentoría directa.</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="training">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow" data-i18n="training.eyebrow">Formación en curso</div>
+      <h2>Google Cybersecurity Professional Certificate</h2>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-head">
+        <div>
+          <h3 data-i18n="training.subtitle">Programa de 8 módulos — Coursera / Google</h3>
+          <div class="cert-meta" data-i18n="training.focus">Enfoque: fundamentos de seguridad defensiva (Blue Team)</div>
+        </div>
+        <span class="status-tag status-progress" data-i18n="training.statustag">EN CURSO</span>
+      </div>
+      <ul class="module-list">
+        <li><span><span class="module-num">01</span>Foundations of Cybersecurity</span><span class="status-tag status-done" data-i18n="status.done">Completado</span></li>
+        <li><span><span class="module-num">02</span>Play It Safe: Manage Security Risks</span><span class="status-tag status-done" data-i18n="status.done">Completado</span></li>
+        <li><span><span class="module-num">03</span>Connect and Protect: Networks and Network Security</span><span class="status-tag status-progress" data-i18n="status.progress">En curso</span></li>
+        <li><span><span class="module-num">04</span>Tools of the Trade: Linux and SQL</span><span class="status-tag status-todo" data-i18n="status.pending">Pendiente</span></li>
+        <li><span><span class="module-num">05</span>Assets, Threats, and Vulnerabilities</span><span class="status-tag status-todo" data-i18n="status.pending">Pendiente</span></li>
+        <li><span><span class="module-num">06</span>Sound the Alarm: Detection and Response</span><span class="status-tag status-todo" data-i18n="status.pending">Pendiente</span></li>
+        <li><span><span class="module-num">07</span>Automate Cybersecurity Tasks with Python</span><span class="status-tag status-todo" data-i18n="status.pending">Pendiente</span></li>
+        <li><span><span class="module-num">08</span>Put It to Work: Prepare for Jobs</span><span class="status-tag status-todo" data-i18n="status.pending">Pendiente</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow" data-i18n="skills.eyebrow">Matriz de capacidades</div>
+      <h2 data-i18n="skills.title">Habilidades en desarrollo</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h4 data-i18n="skill1.title">Fundamentos de seguridad</h4>
+        <div class="skill-desc" data-i18n="skill1.desc">Tríada CIA, gestión de riesgos, marcos de referencia (NIST).</div>
+        <div class="level"><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="level-label" data-i18n="level.foundations">Fundamentos</span></div>
+      </div>
+      <div class="skill-card">
+        <h4 data-i18n="skill2.title">Redes y protocolos</h4>
+        <div class="skill-desc" data-i18n="skill2.desc">Modelo OSI/TCP-IP, firewalls, captura de paquetes con Wireshark.</div>
+        <div class="level"><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="level-label" data-i18n="level.foundations">Fundamentos</span></div>
+      </div>
+      <div class="skill-card">
+        <h4 data-i18n="skill3.title">Linux &amp; línea de comandos</h4>
+        <div class="skill-desc" data-i18n="skill3.desc">Navegación de sistema de archivos, permisos, gestión de procesos.</div>
+        <div class="level"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="level-label" data-i18n="level.starting">Iniciando</span></div>
+      </div>
+      <div class="skill-card">
+        <h4>SQL</h4>
+        <div class="skill-desc" data-i18n="skill4.desc">Consultas básicas para análisis de logs y auditoría de datos.</div>
+        <div class="level"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="level-label" data-i18n="level.starting">Iniciando</span></div>
+      </div>
+      <div class="skill-card">
+        <h4 data-i18n="skill5.title">Python para seguridad</h4>
+        <div class="skill-desc" data-i18n="skill5.desc">Automatización de tareas repetitivas de análisis y monitoreo.</div>
+        <div class="level"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="level-label" data-i18n="level.starting">Iniciando</span></div>
+      </div>
+      <div class="skill-card">
+        <h4 data-i18n="skill6.title">Detección y respuesta</h4>
+        <div class="skill-desc" data-i18n="skill6.desc">Conceptos de SIEM, identificación de eventos e indicadores de compromiso.</div>
+        <div class="level"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="level-label" data-i18n="level.starting">Iniciando</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="roadmap">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow" data-i18n="roadmap.eyebrow">En cola</div>
+      <h2 data-i18n="roadmap.title">Próximos pasos</h2>
+    </div>
+    <ul class="roadmap">
+      <li>
+        <div class="rm-ts" data-i18n="roadmap.ts.now">AHORA</div>
+        <h4 data-i18n="roadmap.item1.h4">Terminar Google Cybersecurity Professional Certificate</h4>
+        <p data-i18n="roadmap.item1.p">Completar los 8 módulos, incluyendo el proyecto final de detección de incidentes.</p>
+      </li>
+      <li class="queued">
+        <div class="rm-ts" data-i18n="roadmap.ts.next">SIGUIENTE</div>
+        <h4 data-i18n="roadmap.item2.h4">Montar un laboratorio casero</h4>
+        <p data-i18n="roadmap.item2.p">VirtualBox + Kali Linux y Security Onion, para practicar en un entorno controlado propio.</p>
+      </li>
+      <li class="queued">
+        <div class="rm-ts" data-i18n="roadmap.ts.queued">EN COLA</div>
+        <h4 data-i18n="roadmap.item3.h4">TryHackMe — ruta Pre Security</h4>
+        <p data-i18n="roadmap.item3.p">Primeros retos prácticos de redes y fundamentos, documentados como write-ups públicos.</p>
+      </li>
+      <li class="queued">
+        <div class="rm-ts" data-i18n="roadmap.ts.queued">EN COLA</div>
+        <h4 data-i18n="roadmap.item4.h4">Publicar mi primer write-up técnico</h4>
+        <p data-i18n="roadmap.item4.p">Un análisis paso a paso de una sala de TryHackMe, para empezar a construir el repositorio de GitHub.</p>
+      </li>
+      <li class="queued">
+        <div class="rm-ts" data-i18n="roadmap.ts.planned">PLANIFICADO</div>
+        <h4 data-i18n="roadmap.item5.h4">CompTIA Security+</h4>
+        <p data-i18n="roadmap.item5.p">Certificación de referencia en la industria una vez consolidada la base actual.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-panel">
+      <div>
+        <h2 data-i18n="contact.title">Hablemos.</h2>
+        <p data-i18n="contact.p">Abierto a oportunidades junior en ciberseguridad — SOC, análisis de seguridad o roles de entrada al sector.</p>
+      </div>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/lazaro-herrera-jimenez-83485b394/?skipRedirect=true" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn btn-ghost" href="mailto:herrera.lazaro@gmail.com">herrera.lazaro@gmail.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer data-i18n="footer.text">
+  © 2026 LÁZARO HERRERA JIMÉNEZ — PORTFOLIO EN CONSTRUCCIÓN CONTINUA
+</footer>
+
+<script>
+const translations = {
+  es: {
+    "nav.about":"Sobre mí","nav.training":"Formación","nav.skills":"Habilidades","nav.roadmap":"Hoja de ruta","nav.contact":"Contacto","nav.status":"EN FORMACIÓN",
+    "hero.eyebrow":"Registro de analista · Estado: activo","hero.role":"Analista de Ciberseguridad en Formación",
+    "hero.p1":"Estoy construyendo mi base en ciberseguridad de forma metódica: redes, sistemas Linux, detección de incidentes y fundamentos de seguridad defensiva. No vengo con años de experiencia — vengo con constancia, curiosidad técnica y la disciplina de documentar cada cosa que aprendo.",
+    "hero.p2":"Este portfolio es, en sí mismo, parte de ese proceso: un registro vivo de mi formación que se irá actualizando módulo a módulo, laboratorio a laboratorio.",
+    "cta.linkedin":"Conectar en LinkedIn ↗","cta.email":"Escribir un correo",
+    "panel.title":"Panel de estado","panel.label.program":"Programa actual","panel.label.status":"Estado","panel.value.status":"En curso","panel.label.focus":"Enfoque","panel.label.milestone":"Próximo hito","panel.label.location":"Ubicación","panel.value.location":"Israel",
+    "ticker.caption":"// registro de aprendizaje — se actualiza a medida que avanzo","ticker.wireshark":"captura de paquetes","ticker.cia":"Tríada CIA — confidencialidad / integridad / disponibilidad","ticker.homelab":"Laboratorio casero — VirtualBox + Kali Linux",
+    "about.eyebrow":"Briefing","about.title":"Sobre mí",
+    "about.p1":"Me acerqué a la ciberseguridad por una razón simple: me atrae entender cómo funcionan realmente los sistemas — y cómo se rompen. En lugar de esperar a tener \"suficiente\" experiencia para empezar a mostrar algo, decidí construir mi formación en público, documentando cada módulo, cada concepto y cada herramienta nueva.",
+    "about.p2":"Actualmente curso el <strong>Google Cybersecurity Professional Certificate</strong>, un programa orientado a fundamentos de seguridad defensiva: redes, sistemas Linux, bases de datos SQL, detección de incidentes y automatización básica con Python. Mi objetivo a corto plazo es un puesto junior en un SOC (Security Operations Center), donde pueda seguir aprendiendo con mentoría directa.",
+    "training.eyebrow":"Formación en curso","training.subtitle":"Programa de 8 módulos — Coursera / Google","training.focus":"Enfoque: fundamentos de seguridad defensiva (Blue Team)","training.statustag":"EN CURSO",
+    "status.done":"Completado","status.progress":"En curso","status.pending":"Pendiente",
+    "skills.eyebrow":"Matriz de capacidades","skills.title":"Habilidades en desarrollo",
+    "skill1.title":"Fundamentos de seguridad","skill1.desc":"Tríada CIA, gestión de riesgos, marcos de referencia (NIST).",
+    "skill2.title":"Redes y protocolos","skill2.desc":"Modelo OSI/TCP-IP, firewalls, captura de paquetes con Wireshark.",
+    "skill3.title":"Linux &amp; línea de comandos","skill3.desc":"Navegación de sistema de archivos, permisos, gestión de procesos.",
+    "skill4.desc":"Consultas básicas para análisis de logs y auditoría de datos.",
+    "skill5.title":"Python para seguridad","skill5.desc":"Automatización de tareas repetitivas de análisis y monitoreo.",
+    "skill6.title":"Detección y respuesta","skill6.desc":"Conceptos de SIEM, identificación de eventos e indicadores de compromiso.",
+    "level.foundations":"Fundamentos","level.starting":"Iniciando",
+    "roadmap.eyebrow":"En cola","roadmap.title":"Próximos pasos",
+    "roadmap.ts.now":"AHORA","roadmap.ts.next":"SIGUIENTE","roadmap.ts.queued":"EN COLA","roadmap.ts.planned":"PLANIFICADO",
+    "roadmap.item1.h4":"Terminar Google Cybersecurity Professional Certificate","roadmap.item1.p":"Completar los 8 módulos, incluyendo el proyecto final de detección de incidentes.",
+    "roadmap.item2.h4":"Montar un laboratorio casero","roadmap.item2.p":"VirtualBox + Kali Linux y Security Onion, para practicar en un entorno controlado propio.",
+    "roadmap.item3.h4":"TryHackMe — ruta Pre Security","roadmap.item3.p":"Primeros retos prácticos de redes y fundamentos, documentados como write-ups públicos.",
+    "roadmap.item4.h4":"Publicar mi primer write-up técnico","roadmap.item4.p":"Un análisis paso a paso de una sala de TryHackMe, para empezar a construir el repositorio de GitHub.",
+    "roadmap.item5.h4":"CompTIA Security+","roadmap.item5.p":"Certificación de referencia en la industria una vez consolidada la base actual.",
+    "contact.title":"Hablemos.","contact.p":"Abierto a oportunidades junior en ciberseguridad — SOC, análisis de seguridad o roles de entrada al sector.",
+    "footer.text":"© 2026 LÁZARO HERRERA JIMÉNEZ — PORTFOLIO EN CONSTRUCCIÓN CONTINUA"
+  },
+  en: {
+    "nav.about":"About","nav.training":"Training","nav.skills":"Skills","nav.roadmap":"Roadmap","nav.contact":"Contact","nav.status":"IN TRAINING",
+    "hero.eyebrow":"Analyst log · Status: active","hero.role":"Cybersecurity Analyst in Training",
+    "hero.p1":"I'm building my foundation in cybersecurity methodically: networking, Linux systems, incident detection, and defensive security fundamentals. I don't come with years of experience — I come with consistency, technical curiosity, and the discipline to document everything I learn.",
+    "hero.p2":"This portfolio is, in itself, part of that process: a living record of my training that keeps updating module by module, lab by lab.",
+    "cta.linkedin":"Connect on LinkedIn ↗","cta.email":"Send an email",
+    "panel.title":"Status panel","panel.label.program":"Current program","panel.label.status":"Status","panel.value.status":"In progress","panel.label.focus":"Focus","panel.label.milestone":"Next milestone","panel.label.location":"Location","panel.value.location":"Israel",
+    "ticker.caption":"// learning log — updated as I progress","ticker.wireshark":"packet capture basics","ticker.cia":"CIA Triad — confidentiality / integrity / availability","ticker.homelab":"Home lab setup — VirtualBox + Kali Linux",
+    "about.eyebrow":"Briefing","about.title":"About me",
+    "about.p1":"I got into cybersecurity for a simple reason: I'm drawn to understanding how systems actually work — and how they break. Instead of waiting until I had \"enough\" experience to show something, I decided to build my training in public, documenting every module, concept, and new tool along the way.",
+    "about.p2":"I'm currently taking the <strong>Google Cybersecurity Professional Certificate</strong>, a program focused on defensive security fundamentals: networking, Linux systems, SQL databases, incident detection, and basic automation with Python. My short-term goal is a junior role in a SOC (Security Operations Center), where I can keep learning with direct mentorship.",
+    "training.eyebrow":"Current training","training.subtitle":"8-module program — Coursera / Google","training.focus":"Focus: defensive security fundamentals (Blue Team)","training.statustag":"IN PROGRESS",
+    "status.done":"Completed","status.progress":"In progress","status.pending":"Pending",
+    "skills.eyebrow":"Capability matrix","skills.title":"Skills in development",
+    "skill1.title":"Security fundamentals","skill1.desc":"CIA triad, risk management, reference frameworks (NIST).",
+    "skill2.title":"Networking & protocols","skill2.desc":"OSI/TCP-IP model, firewalls, packet capture with Wireshark.",
+    "skill3.title":"Linux &amp; command line","skill3.desc":"File system navigation, permissions, process management.",
+    "skill4.desc":"Basic queries for log analysis and data auditing.",
+    "skill5.title":"Python for security","skill5.desc":"Automating repetitive analysis and monitoring tasks.",
+    "skill6.title":"Detection & response","skill6.desc":"SIEM concepts, event identification and indicators of compromise.",
+    "level.foundations":"Fundamentals","level.starting":"Starting out",
+    "roadmap.eyebrow":"Queued","roadmap.title":"Next steps",
+    "roadmap.ts.now":"NOW","roadmap.ts.next":"NEXT","roadmap.ts.queued":"QUEUED","roadmap.ts.planned":"PLANNED",
+    "roadmap.item1.h4":"Finish the Google Cybersecurity Professional Certificate","roadmap.item1.p":"Complete all 8 modules, including the final incident detection project.",
+    "roadmap.item2.h4":"Set up a home lab","roadmap.item2.p":"VirtualBox + Kali Linux and Security Onion, to practice in my own controlled environment.",
+    "roadmap.item3.h4":"TryHackMe — Pre Security path","roadmap.item3.p":"First hands-on networking and fundamentals challenges, documented as public write-ups.",
+    "roadmap.item4.h4":"Publish my first technical write-up","roadmap.item4.p":"A step-by-step analysis of a TryHackMe room, to start building my GitHub repository.",
+    "roadmap.item5.h4":"CompTIA Security+","roadmap.item5.p":"Industry-recognized certification once my current foundation is solid.",
+    "contact.title":"Let's talk.","contact.p":"Open to junior cybersecurity opportunities — SOC, security analysis, or entry-level roles in the field.",
+    "footer.text":"© 2026 LÁZARO HERRERA JIMÉNEZ — PORTFOLIO UNDER CONTINUOUS CONSTRUCTION"
+  },
+  he: {
+    "nav.about":"אודותיי","nav.training":"הכשרה","nav.skills":"כישורים","nav.roadmap":"מפת דרכים","nav.contact":"יצירת קשר","nav.status":"בהכשרה",
+    "hero.eyebrow":"יומן אנליסט · סטטוס: פעיל","hero.role":"אנליסט אבטחת סייבר בהכשרה",
+    "hero.p1":"אני בונה את הבסיס שלי בתחום אבטחת הסייבר בצורה שיטתית: רשתות, מערכות לינוקס, זיהוי אירועים ויסודות אבטחה הגנתית. אין לי שנות ניסיון — יש לי עקביות, סקרנות טכנית ומשמעת לתעד כל דבר שאני לומד.",
+    "hero.p2":"התיק הזה הוא בעצמו חלק מהתהליך: תיעוד חי של ההכשרה שלי, שמתעדכן מודול אחרי מודול, מעבדה אחרי מעבדה.",
+    "cta.linkedin":"התחברות ב-LinkedIn ↗","cta.email":"שליחת מייל",
+    "panel.title":"לוח סטטוס","panel.label.program":"תוכנית נוכחית","panel.label.status":"סטטוס","panel.value.status":"בתהליך","panel.label.focus":"התמחות","panel.label.milestone":"אבן דרך הבאה","panel.label.location":"מיקום","panel.value.location":"ישראל",
+    "ticker.caption":"// יומן למידה — מתעדכן ככל שאני מתקדם","ticker.wireshark":"לכידת חבילות בסיסית","ticker.cia":"עקרון ה-CIA — סודיות / שלמות / זמינות","ticker.homelab":"מעבדה ביתית — VirtualBox + Kali Linux",
+    "about.eyebrow":"תדריך","about.title":"אודותיי",
+    "about.p1":"התחברתי לעולם אבטחת הסייבר מסיבה פשוטה: אני נמשך להבנה איך מערכות באמת עובדות — ואיך הן נשברות. במקום לחכות עד שיהיה לי \"מספיק\" ניסיון כדי להראות משהו, החלטתי לבנות את ההכשרה שלי בפומבי, ולתעד כל מודול, מושג וכלי חדש שאני לומד.",
+    "about.p2":"אני לומד כרגע את <strong>Google Cybersecurity Professional Certificate</strong>, תוכנית המתמקדת ביסודות אבטחה הגנתית: רשתות, מערכות לינוקס, מסדי נתונים SQL, זיהוי אירועים ואוטומציה בסיסית עם Python. המטרה שלי לטווח הקצר היא תפקיד ג'וניור ב-SOC (מרכז ניטור אבטחה), שם אוכל להמשיך וללמוד בליווי ישיר.",
+    "training.eyebrow":"הכשרה נוכחית","training.subtitle":"תוכנית בת 8 מודולים — Coursera / Google","training.focus":"התמחות: יסודות אבטחה הגנתית (Blue Team)","training.statustag":"בתהליך",
+    "status.done":"הושלם","status.progress":"בתהליך","status.pending":"טרם החל",
+    "skills.eyebrow":"מטריצת יכולות","skills.title":"כישורים בפיתוח",
+    "skill1.title":"יסודות אבטחה","skill1.desc":"עקרון ה-CIA, ניהול סיכונים, מסגרות התייחסות (NIST).",
+    "skill2.title":"רשתות ופרוטוקולים","skill2.desc":"מודל OSI/TCP-IP, חומות אש, לכידת חבילות עם Wireshark.",
+    "skill3.title":"לינוקס ושורת פקודה","skill3.desc":"ניווט במערכת קבצים, הרשאות, ניהול תהליכים.",
+    "skill4.desc":"שאילתות בסיסיות לניתוח לוגים וביקורת נתונים.",
+    "skill5.title":"Python לאבטחה","skill5.desc":"אוטומציה של משימות ניתוח וניטור חוזרות.",
+    "skill6.title":"זיהוי ותגובה","skill6.desc":"מושגי SIEM, זיהוי אירועים ואינדיקטורים לפריצה.",
+    "level.foundations":"בסיסי","level.starting":"בתחילת הדרך",
+    "roadmap.eyebrow":"בתור","roadmap.title":"הצעדים הבאים",
+    "roadmap.ts.now":"עכשיו","roadmap.ts.next":"הבא בתור","roadmap.ts.queued":"בתור","roadmap.ts.planned":"מתוכנן",
+    "roadmap.item1.h4":"לסיים את Google Cybersecurity Professional Certificate","roadmap.item1.p":"השלמת כל 8 המודולים, כולל פרויקט הסיום בזיהוי אירועים.",
+    "roadmap.item2.h4":"הקמת מעבדה ביתית","roadmap.item2.p":"VirtualBox + Kali Linux ו-Security Onion, לתרגול בסביבה מבוקרת משלי.",
+    "roadmap.item3.h4":"TryHackMe — מסלול Pre Security","roadmap.item3.p":"אתגרים ראשונים בתחום הרשתות והיסודות, מתועדים כמאמרי walkthrough פומביים.",
+    "roadmap.item4.h4":"פרסום ה-write-up הטכני הראשון שלי","roadmap.item4.p":"ניתוח שלב-אחר-שלב של חדר ב-TryHackMe, כדי להתחיל לבנות את מאגר ה-GitHub שלי.",
+    "roadmap.item5.h4":"CompTIA Security+","roadmap.item5.p":"הסמכה מוכרת בתעשייה לאחר גיבוש הבסיס הנוכחי.",
+    "contact.title":"בואו נדבר.","contact.p":"פתוח להזדמנויות ג'וניור בתחום אבטחת הסייבר — SOC, ניתוח אבטחה, או תפקידי כניסה לתחום.",
+    "footer.text":"© 2026 לזארו הררה חימנס — תיק עבודות בבנייה מתמדת"
+  }
+};
+
+function applyLanguage(lang){
+  document.documentElement.lang = lang;
+  document.documentElement.dir = (lang === 'he') ? 'rtl' : 'ltr';
+  const dict = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    const key = el.getAttribute('data-i18n');
+    if(dict[key] !== undefined){ el.innerHTML = dict[key]; }
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+}
+</script>
+
+</body>
+</html>
