@@ -4,6 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lázaro Herrera Jiménez — Analista de Ciberseguridad en Formación</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<!-- Open Graph / social preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lázaro Herrera Jiménez — Cybersecurity Analyst in Training">
+<meta property="og:description" content="Portfolio de formación en ciberseguridad: fundamentos de seguridad defensiva, redes, Linux y detección de incidentes, en progreso hacia un rol junior de SOC.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:url" content="https://herreralazaro-source.github.io/Portfolio/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lázaro Herrera Jiménez — Cybersecurity Analyst in Training">
+<meta name="twitter:description" content="Portfolio de formación en ciberseguridad: fundamentos de seguridad defensiva, redes, Linux y detección de incidentes.">
+<meta name="twitter:image" content="og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Hebrew:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -248,7 +260,9 @@
     display:inline-block;
     animation: scroll-left 42s linear infinite;
   }
-  .ticker-outer:hover .ticker-track{ animation-play-state: paused; }
+  .ticker-outer:hover .ticker-track,
+  .ticker-outer:focus-within .ticker-track{ animation-play-state: paused; }
+  .ticker-outer:focus-visible{ outline: 2px solid var(--amber); outline-offset: -2px; }
   @media (prefers-reduced-motion: reduce){
     .ticker-track{ animation: none; }
     .ticker-outer{ overflow-x: auto; }
@@ -397,6 +411,14 @@
   .contact-links .btn-primary:hover{ background:#DDE5EE; }
   .contact-links .btn-ghost{ border-color:#5C7091; color:#EDF1F6; }
   .contact-links .btn-ghost:hover{ background:#1B3762; }
+  .soon-badge{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    color: #7E93B3;
+    display:flex; align-items:center;
+    padding: 0 4px;
+  }
 
   footer{
     padding: 26px 0 40px;
@@ -453,13 +475,14 @@
         <div class="panel-row"><span data-i18n="panel.label.focus">Enfoque</span><span>SOC / Blue Team</span></div>
         <div class="panel-row"><span data-i18n="panel.label.milestone">Próximo hito</span><span>TryHackMe · Pre Security</span></div>
         <div class="panel-row"><span data-i18n="panel.label.location">Ubicación</span><span data-i18n="panel.value.location">Israel</span></div>
+        <div class="panel-row"><span data-i18n="panel.label.updated">Última actualización</span><span data-i18n="panel.value.updated">Julio 2026</span></div>
       </div>
     </div>
   </div>
 </header>
 
 <div class="ticker-caption" data-i18n="ticker.caption">// registro de aprendizaje — se actualiza a medida que avanzo</div>
-<div class="ticker-outer">
+<div class="ticker-outer" tabindex="0" role="region" aria-label="Learning activity log, auto-scrolling">
   <div class="ticker-track">
     <span class="log-entry"><span class="ts">[2026-06-05]</span> <span class="tag">MODULE_COMPLETE</span> :: Foundations of Cybersecurity</span>
     <span class="log-entry"><span class="ts">[2026-06-12]</span> <span class="tag">MODULE_COMPLETE</span> :: Play It Safe — Manage Security Risks</span>
@@ -608,6 +631,7 @@
       <div class="contact-links">
         <a class="btn btn-primary" href="https://www.linkedin.com/in/lazaro-herrera-jimenez-83485b394/?skipRedirect=true" target="_blank" rel="noopener">LinkedIn ↗</a>
         <a class="btn btn-ghost" href="mailto:herrera.lazaro@gmail.com">herrera.lazaro@gmail.com</a>
+        <span class="soon-badge" data-i18n="contact.github.soon">GitHub — próximamente</span>
       </div>
     </div>
   </div>
@@ -648,6 +672,8 @@ const translations = {
     "roadmap.item4.h4":"Publicar mi primer write-up técnico","roadmap.item4.p":"Un análisis paso a paso de una sala de TryHackMe, para empezar a construir el repositorio de GitHub.",
     "roadmap.item5.h4":"CompTIA Security+","roadmap.item5.p":"Certificación de referencia en la industria una vez consolidada la base actual.",
     "contact.title":"Hablemos.","contact.p":"Abierto a oportunidades junior en ciberseguridad — SOC, análisis de seguridad o roles de entrada al sector.",
+    "contact.github.soon":"GitHub — próximamente",
+    "panel.label.updated":"Última actualización","panel.value.updated":"Julio 2026",
     "footer.text":"© 2026 LÁZARO HERRERA JIMÉNEZ — PORTFOLIO EN CONSTRUCCIÓN CONTINUA"
   },
   en: {
@@ -679,6 +705,8 @@ const translations = {
     "roadmap.item4.h4":"Publish my first technical write-up","roadmap.item4.p":"A step-by-step analysis of a TryHackMe room, to start building my GitHub repository.",
     "roadmap.item5.h4":"CompTIA Security+","roadmap.item5.p":"Industry-recognized certification once my current foundation is solid.",
     "contact.title":"Let's talk.","contact.p":"Open to junior cybersecurity opportunities — SOC, security analysis, or entry-level roles in the field.",
+    "contact.github.soon":"GitHub — coming soon",
+    "panel.label.updated":"Last updated","panel.value.updated":"July 2026",
     "footer.text":"© 2026 LÁZARO HERRERA JIMÉNEZ — PORTFOLIO UNDER CONTINUOUS CONSTRUCTION"
   },
   he: {
@@ -710,6 +738,8 @@ const translations = {
     "roadmap.item4.h4":"פרסום ה-write-up הטכני הראשון שלי","roadmap.item4.p":"ניתוח שלב-אחר-שלב של חדר ב-TryHackMe, כדי להתחיל לבנות את מאגר ה-GitHub שלי.",
     "roadmap.item5.h4":"CompTIA Security+","roadmap.item5.p":"הסמכה מוכרת בתעשייה לאחר גיבוש הבסיס הנוכחי.",
     "contact.title":"בואו נדבר.","contact.p":"פתוח להזדמנויות ג'וניור בתחום אבטחת הסייבר — SOC, ניתוח אבטחה, או תפקידי כניסה לתחום.",
+    "contact.github.soon":"GitHub — בקרוב",
+    "panel.label.updated":"עדכון אחרון","panel.value.updated":"יולי 2026",
     "footer.text":"© 2026 לזארו הררה חימנס — תיק עבודות בבנייה מתמדת"
   }
 };
