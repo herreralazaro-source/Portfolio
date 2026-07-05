@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -422,8 +422,8 @@
       <a href="#contact" data-i18n="nav.contact">Contacto</a>
       <span class="status-pill"><span class="dot"></span><span data-i18n="nav.status">EN FORMACIÓN</span></span>
       <div class="lang-switch">
-        <button type="button" class="lang-btn active" data-lang="es" onclick="applyLanguage('es')">ES</button>
-        <button type="button" class="lang-btn" data-lang="en" onclick="applyLanguage('en')">EN</button>
+        <button type="button" class="lang-btn" data-lang="es" onclick="applyLanguage('es')">ES</button>
+        <button type="button" class="lang-btn active" data-lang="en" onclick="applyLanguage('en')">EN</button>
         <button type="button" class="lang-btn" data-lang="he" onclick="applyLanguage('he')">HE</button>
       </div>
     </div>
@@ -726,6 +726,9 @@ function applyLanguage(lang){
     b.classList.toggle('active', b.dataset.lang === lang);
   });
 }
+
+// Default language on page load
+applyLanguage('en');
 </script>
 
 </body>
