@@ -323,6 +323,25 @@
   @media (max-width: 720px){ .brief-text{ grid-template-columns:1fr; } }
   .brief-text p{ font-size: 15.5px; margin: 0 0 14px; }
 
+  .background-note{
+    margin-top: 30px;
+    padding: 20px 24px;
+    border-left: 3px solid var(--teal);
+    background: var(--teal-soft);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    max-width: 78ch;
+  }
+  .background-note-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+  .background-note p{ font-size: 14.5px; margin: 0; color: var(--ink); }
+  html[dir="rtl"] .background-note{ border-left:none; border-right: 3px solid var(--teal); border-radius: var(--radius) 0 0 var(--radius); }
+
   /* Training / certificate */
   .cert-card{
     background: var(--panel);
@@ -537,6 +556,10 @@
       <p data-i18n="about.p1">Me acerqué a la ciberseguridad por una razón simple: me atrae entender cómo funcionan realmente los sistemas — y cómo se rompen. En lugar de esperar a tener "suficiente" experiencia para empezar a mostrar algo, decidí construir mi formación en público, documentando cada módulo, cada concepto y cada herramienta nueva.</p>
       <p data-i18n="about.p2">Actualmente curso el <strong>Google Cybersecurity Professional Certificate</strong>, un programa orientado a fundamentos de seguridad defensiva: redes, sistemas Linux, bases de datos SQL, detección de incidentes y automatización básica con Python. Mi objetivo a corto plazo es un puesto junior en un SOC (Security Operations Center), donde pueda seguir aprendiendo con mentoría directa.</p>
     </div>
+    <div class="background-note">
+      <div class="background-note-label" data-i18n="about.background.label">Trayectoria previa</div>
+      <p data-i18n="about.p3">Antes de dar el salto a ciberseguridad, pasé 8 años como técnico de producción en Intel — un puesto al que entré sin ninguna titulación formal, en un entorno de manufactura de alta precisión donde el cumplimiento estricto de protocolos y la atención al detalle no son opcionales. Esa misma disciplina operativa, y la experiencia de haber construido una trayectoria sólida partiendo de cero, es lo que ahora aplico a mi formación en ciberseguridad.</p>
+    </div>
   </div>
 </section>
 
@@ -680,6 +703,8 @@ const translations = {
     "about.eyebrow":"Briefing","about.title":"Sobre mí",
     "about.p1":"Me acerqué a la ciberseguridad por una razón simple: me atrae entender cómo funcionan realmente los sistemas — y cómo se rompen. En lugar de esperar a tener \"suficiente\" experiencia para empezar a mostrar algo, decidí construir mi formación en público, documentando cada módulo, cada concepto y cada herramienta nueva.",
     "about.p2":"Actualmente curso el <strong>Google Cybersecurity Professional Certificate</strong>, un programa orientado a fundamentos de seguridad defensiva: redes, sistemas Linux, bases de datos SQL, detección de incidentes y automatización básica con Python. Mi objetivo a corto plazo es un puesto junior en un SOC (Security Operations Center), donde pueda seguir aprendiendo con mentoría directa.",
+    "about.background.label":"Trayectoria previa",
+    "about.p3":"Antes de dar el salto a ciberseguridad, pasé 8 años como técnico de producción en Intel — un puesto al que entré sin ninguna titulación formal, en un entorno de manufactura de alta precisión donde el cumplimiento estricto de protocolos y la atención al detalle no son opcionales. Esa misma disciplina operativa, y la experiencia de haber construido una trayectoria sólida partiendo de cero, es lo que ahora aplico a mi formación en ciberseguridad.",
     "training.eyebrow":"Formación en curso","training.subtitle":"Programa de 9 módulos — Coursera / Google","training.focus":"Enfoque: fundamentos de seguridad defensiva (Blue Team)","training.statustag":"EN CURSO",
     "status.done":"Completado","status.progress":"En curso","status.pending":"Pendiente",
     "skills.eyebrow":"Matriz de capacidades","skills.title":"Habilidades en desarrollo",
@@ -713,6 +738,8 @@ const translations = {
     "about.eyebrow":"Briefing","about.title":"About me",
     "about.p1":"I got into cybersecurity for a simple reason: I'm drawn to understanding how systems actually work — and how they break. Instead of waiting until I had \"enough\" experience to show something, I decided to build my training in public, documenting every module, concept, and new tool along the way.",
     "about.p2":"I'm currently taking the <strong>Google Cybersecurity Professional Certificate</strong>, a program focused on defensive security fundamentals: networking, Linux systems, SQL databases, incident detection, and basic automation with Python. My short-term goal is a junior role in a SOC (Security Operations Center), where I can keep learning with direct mentorship.",
+    "about.background.label":"Previous background",
+    "about.p3":"Before making the jump to cybersecurity, I spent 8 years as a production technician at Intel — a role I entered with no formal qualifications, in a high-precision manufacturing environment where strict protocol compliance and attention to detail aren't optional. That same operational discipline, and the experience of building a solid track record starting from zero, is exactly what I now bring to my cybersecurity training.",
     "training.eyebrow":"Current training","training.subtitle":"9-module program — Coursera / Google","training.focus":"Focus: defensive security fundamentals (Blue Team)","training.statustag":"IN PROGRESS",
     "status.done":"Completed","status.progress":"In progress","status.pending":"Pending",
     "skills.eyebrow":"Capability matrix","skills.title":"Skills in development",
@@ -746,6 +773,8 @@ const translations = {
     "about.eyebrow":"תדריך","about.title":"אודותיי",
     "about.p1":"התחברתי לעולם אבטחת הסייבר מסיבה פשוטה: אני נמשך להבנה איך מערכות באמת עובדות — ואיך הן נשברות. במקום לחכות עד שיהיה לי \"מספיק\" ניסיון כדי להראות משהו, החלטתי לבנות את ההכשרה שלי בפומבי, ולתעד כל מודול, מושג וכלי חדש שאני לומד.",
     "about.p2":"אני לומד כרגע את <strong>Google Cybersecurity Professional Certificate</strong>, תוכנית המתמקדת ביסודות אבטחה הגנתית: רשתות, מערכות לינוקס, מסדי נתונים SQL, זיהוי אירועים ואוטומציה בסיסית עם Python. המטרה שלי לטווח הקצר היא תפקיד ג'וניור ב-SOC (מרכז ניטור אבטחה), שם אוכל להמשיך וללמוד בליווי ישיר.",
+    "about.background.label":"רקע תעסוקתי קודם",
+    "about.p3":"לפני המעבר לעולם אבטחת הסייבר, עבדתי 8 שנים כטכנאי ייצור באינטל — תפקיד שנכנסתי אליו ללא כל תואר או הסמכה פורמלית, בסביבת ייצור בדיוק גבוה שבה עמידה קפדנית בנהלים ותשומת לב לפרטים אינם אופציונליים. אותה משמעת תפעולית, יחד עם הניסיון של בניית מסלול קריירה יציב מאפס, הם בדיוק מה שאני מביא כעת להכשרה שלי בתחום אבטחת הסייבר.",
     "training.eyebrow":"הכשרה נוכחית","training.subtitle":"תוכנית בת 9 מודולים — Coursera / Google","training.focus":"התמחות: יסודות אבטחה הגנתית (Blue Team)","training.statustag":"בתהליך",
     "status.done":"הושלם","status.progress":"בתהליך","status.pending":"טרם החל",
     "skills.eyebrow":"מטריצת יכולות","skills.title":"כישורים בפיתוח",
