@@ -393,6 +393,7 @@
   .project-head h3{ font-size: 19px; color: var(--navy-deep); }
   .project-body{ padding: 24px 26px 28px; }
   .project-body p{ font-size: 14.5px; margin: 0 0 18px; max-width: 74ch; }
+  .project-body .btn{ margin-top: 4px; }
   .project-subhead{
     font-family:'IBM Plex Mono', monospace;
     font-size: 11.5px;
@@ -705,24 +706,7 @@
 
       <div class="project-body">
         <p data-i18n="project1.desc">Revisé y actualicé los permisos de archivos y directorios dentro de un directorio de proyectos compartido, para alinearlos con los niveles de autorización correctos y reducir riesgos de acceso indebido.</p>
-
-        <div class="project-subhead" data-i18n="project1.actions.label">Lo que hice</div>
-        <ul class="project-actions">
-          <li data-i18n="project1.action1">Inspeccioné los permisos existentes de todos los archivos y directorios (incluidos ocultos) con <code>ls -al</code>.</li>
-          <li data-i18n="project1.action2">Eliminé el acceso de escritura de "otros" en un archivo que lo exponía indebidamente, con <code>chmod o-w</code>.</li>
-          <li data-i18n="project1.action3">Restringí un archivo oculto a solo lectura para usuario y grupo, sin acceso para otros, con <code>chmod u-w,g-w,g+r</code>.</li>
-          <li data-i18n="project1.action4">Eliminé el permiso de ejecución del grupo sobre un directorio sensible, dejando el acceso solo al propietario, con <code>chmod g-x</code>.</li>
-        </ul>
-
-        <div class="terminal-block">
-          <div class="terminal-line"><span class="terminal-prompt">researcher2:~/projects$</span> chmod g-x drafts</div>
-          <div class="terminal-line"><span class="terminal-prompt">researcher2:~/projects$</span> ls -al</div>
-          <div class="terminal-line">drwx------ 2 researcher2 research_team 4096 Jul 6 10:06 drafts</div>
-          <div class="terminal-line">-r--r----- 1 researcher2 research_team   46 Jul 6 10:06 .project_x.txt</div>
-          <div class="terminal-line">-rw-rw-r-- 1 researcher2 research_team   46 Jul 6 10:06 project_k.txt</div>
-        </div>
-
-        <p class="project-summary" data-i18n="project1.summary">Este ejercicio reforzó la importancia de aplicar el principio de mínimo privilegio: dar a cada usuario solo el acceso estrictamente necesario, y verificar cada cambio antes de darlo por bueno — una práctica central en la protección de sistemas dentro de un SOC.</p>
+        <a class="btn btn-primary" href="project-file-permissions.html" target="_blank" rel="noopener" data-i18n="project1.cta">Ver caso completo ↗</a>
       </div>
     </div>
   </div>
@@ -805,12 +789,7 @@ const translations = {
     "projects.eyebrow":"Trabajo aplicado","projects.title":"Proyectos",
     "project1.title":"File Permissions in Linux","project1.meta":"Google Cybersecurity Certificate · Actividad de portfolio",
     "project1.desc":"Revisé y actualicé los permisos de archivos y directorios dentro de un directorio de proyectos compartido, para alinearlos con los niveles de autorización correctos y reducir riesgos de acceso indebido.",
-    "project1.actions.label":"Lo que hice",
-    "project1.action1":"Inspeccioné los permisos existentes de todos los archivos y directorios (incluidos ocultos) con <code>ls -al</code>.",
-    "project1.action2":"Eliminé el acceso de escritura de \"otros\" en un archivo que lo exponía indebidamente, con <code>chmod o-w</code>.",
-    "project1.action3":"Restringí un archivo oculto a solo lectura para usuario y grupo, sin acceso para otros, con <code>chmod u-w,g-w,g+r</code>.",
-    "project1.action4":"Eliminé el permiso de ejecución del grupo sobre un directorio sensible, dejando el acceso solo al propietario, con <code>chmod g-x</code>.",
-    "project1.summary":"Este ejercicio reforzó la importancia de aplicar el principio de mínimo privilegio: dar a cada usuario solo el acceso estrictamente necesario, y verificar cada cambio antes de darlo por bueno — una práctica central en la protección de sistemas dentro de un SOC.",
+    "project1.cta":"Ver caso completo ↗",
     "skill1.title":"Fundamentos de seguridad","skill1.desc":"Tríada CIA, gestión de riesgos, marcos de referencia (NIST).",
     "skill2.title":"Redes y protocolos","skill2.desc":"Modelo OSI/TCP-IP, firewalls, captura de paquetes con Wireshark.",
     "skill3.title":"Linux &amp; línea de comandos","skill3.desc":"Navegación de sistema de archivos, permisos, gestión de procesos.",
@@ -849,12 +828,7 @@ const translations = {
     "projects.eyebrow":"Applied work","projects.title":"Projects",
     "project1.title":"File Permissions in Linux","project1.meta":"Google Cybersecurity Certificate · Portfolio activity",
     "project1.desc":"I reviewed and updated file and directory permissions within a shared projects directory, to align them with the correct authorization levels and reduce the risk of improper access.",
-    "project1.actions.label":"What I did",
-    "project1.action1":"Inspected existing permissions for all files and directories (including hidden ones) with <code>ls -al</code>.",
-    "project1.action2":"Removed \"other\" write access from a file that exposed it improperly, using <code>chmod o-w</code>.",
-    "project1.action3":"Restricted a hidden file to read-only for user and group, with no access for others, using <code>chmod u-w,g-w,g+r</code>.",
-    "project1.action4":"Removed group execute permission on a sensitive directory, leaving access to the owner only, using <code>chmod g-x</code>.",
-    "project1.summary":"This exercise reinforced the importance of applying the principle of least privilege: giving each user only the access strictly necessary, and verifying every change before considering it done — a core practice in protecting systems within a SOC.",
+    "project1.cta":"View full case study ↗",
     "skill1.title":"Security fundamentals","skill1.desc":"CIA triad, risk management, reference frameworks (NIST).",
     "skill2.title":"Networking & protocols","skill2.desc":"OSI/TCP-IP model, firewalls, packet capture with Wireshark.",
     "skill3.title":"Linux &amp; command line","skill3.desc":"File system navigation, permissions, process management.",
@@ -893,12 +867,7 @@ const translations = {
     "projects.eyebrow":"עבודה מעשית","projects.title":"פרויקטים",
     "project1.title":"File Permissions in Linux","project1.meta":"Google Cybersecurity Certificate · פעילות תיק עבודות",
     "project1.desc":"בדקתי ועדכנתי הרשאות של קבצים ותיקיות בתוך תיקיית פרויקטים משותפת, כדי להתאים אותן לרמות ההרשאה הנכונות ולצמצם סיכון לגישה לא מורשית.",
-    "project1.actions.label":"מה עשיתי",
-    "project1.action1":"בדקתי את ההרשאות הקיימות של כל הקבצים והתיקיות (כולל קבצים מוסתרים) באמצעות <code>ls -al</code>.",
-    "project1.action2":"הסרתי הרשאת כתיבה מ-\"אחרים\" בקובץ שחשף אותה שלא כראוי, באמצעות <code>chmod o-w</code>.",
-    "project1.action3":"הגבלתי קובץ מוסתר לקריאה בלבד עבור המשתמש והקבוצה, ללא גישה לאחרים, באמצעות <code>chmod u-w,g-w,g+r</code>.",
-    "project1.action4":"הסרתי הרשאת הרצה מהקבוצה עבור תיקייה רגישה, והשארתי גישה לבעלים בלבד, באמצעות <code>chmod g-x</code>.",
-    "project1.summary":"התרגיל הזה חיזק את החשיבות של יישום עקרון ההרשאה המינימלית: לתת לכל משתמש רק את הגישה ההכרחית, ולוודא כל שינוי לפני שמניחים שהוא תקין — נוהג מרכזי בהגנה על מערכות בתוך SOC.",
+    "project1.cta":"לצפייה במקרה המלא ↗",
     "skill1.title":"יסודות אבטחה","skill1.desc":"עקרון ה-CIA, ניהול סיכונים, מסגרות התייחסות (NIST).",
     "skill2.title":"רשתות ופרוטוקולים","skill2.desc":"מודל OSI/TCP-IP, חומות אש, לכידת חבילות עם Wireshark.",
     "skill3.title":"לינוקס ושורת פקודה","skill3.desc":"ניווט במערכת קבצים, הרשאות, ניהול תהליכים.",
