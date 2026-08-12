@@ -461,6 +461,81 @@
   .level .seg.on{ background: var(--teal); }
   .level-label{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; color: var(--ink-soft); margin-left:8px; }
 
+  /* Currently bar */
+  .currently-bar{
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 12px 0;
+  }
+  .currently-bar .wrap{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .currently-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .currently-items{ font-family:'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--ink-soft); }
+
+  /* Skill / tool chips */
+  .chip-group{ margin-bottom: 26px; }
+  .chip-group:last-child{ margin-bottom: 0; }
+  .chip-group-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  .chip-row{ display:flex; flex-wrap:wrap; gap: 8px; }
+  .chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    padding: 7px 13px;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink);
+  }
+  .chip-tool{ border-color: var(--teal); color: var(--teal); background: var(--teal-soft); }
+  .chip-note{ font-size: 12px; color: var(--ink-soft); margin-top: 10px; font-style: italic; }
+  .project-tools{ margin: 2px 0 18px; }
+
+  /* Projects section header with GitHub link */
+  .section-head.projects-head{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:14px; }
+  .github-link{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    text-decoration:none;
+    border-bottom: 1.5px solid var(--navy);
+    padding-bottom: 2px;
+    white-space:nowrap;
+  }
+  .github-link:hover{ color: var(--teal); border-color: var(--teal); }
+
+  /* Home lab note */
+  .homelab-note{
+    padding: 16px 26px 22px;
+    margin:0;
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+    border-top: 1px solid var(--line);
+  }
+
+  html[dir="rtl"] .currently-label,
+  html[dir="rtl"] .currently-items,
+  html[dir="rtl"] .chip-group-label,
+  html[dir="rtl"] .chip,
+  html[dir="rtl"] .github-link{
+    font-family:'Noto Sans Hebrew', 'IBM Plex Mono', monospace;
+  }
+
   /* Roadmap */
   .roadmap{ list-style:none; margin:0; padding:0; border-left: 2px solid var(--line); }
   .roadmap li{
@@ -535,9 +610,10 @@
     </a>
     <div class="navlinks">
       <a href="#about" data-i18n="nav.about">Sobre mí</a>
-      <a href="#training" data-i18n="nav.training">Formación</a>
       <a href="#skills" data-i18n="nav.skills">Habilidades</a>
       <a href="#projects" data-i18n="nav.projects">Proyectos</a>
+      <a href="#homelab" data-i18n="nav.homelab">Home Lab</a>
+      <a href="#training" data-i18n="nav.training">Formación</a>
       <a href="#roadmap" data-i18n="nav.roadmap">Hoja de ruta</a>
       <a href="#contact" data-i18n="nav.contact">Contacto</a>
       <span class="status-pill"><span class="dot"></span><span data-i18n="nav.status">EN FORMACIÓN</span></span>
@@ -579,6 +655,13 @@
   </div>
 </header>
 
+<div class="currently-bar">
+  <div class="wrap">
+    <span class="currently-label" data-i18n="currently.label">ACTUALMENTE</span>
+    <span class="currently-items" data-i18n="currently.items">Google Cybersecurity Professional Certificate · SQL · Linux · Redes</span>
+  </div>
+</div>
+
 <div class="ticker-caption" data-i18n="ticker.caption">// registro de aprendizaje — se actualiza a medida que avanzo</div>
 <div class="ticker-outer" tabindex="0" role="region" aria-label="Learning activity log, auto-scrolling">
   <div class="ticker-track">
@@ -617,7 +700,114 @@
   </div>
 </section>
 
-<section class="alt" id="training">
+<section class="alt" id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow" data-i18n="skills.eyebrow">Capacidades</div>
+      <h2 data-i18n="skills.title">Habilidades y herramientas</h2>
+    </div>
+
+    <div class="chip-group">
+      <div class="chip-group-label" data-i18n="skills.subhead">Habilidades</div>
+      <div class="chip-row">
+        <span class="chip" data-i18n="skill.netsec">Network Security</span>
+        <span class="chip" data-i18n="skill.ir">Incident Response</span>
+        <span class="chip" data-i18n="skill.threatdet">Threat Detection</span>
+        <span class="chip">SQL</span>
+        <span class="chip">Linux</span>
+        <span class="chip" data-i18n="skill.networking">Networking</span>
+      </div>
+    </div>
+
+    <div class="chip-group">
+      <div class="chip-group-label" data-i18n="tools.subhead">Herramientas</div>
+      <div class="chip-row">
+        <span class="chip chip-tool">Linux</span>
+        <span class="chip chip-tool">SQL</span>
+      </div>
+      <div class="chip-note" data-i18n="tools.note">Se irán agregando a medida que las use en laboratorios y proyectos reales.</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head projects-head">
+      <div>
+        <div class="section-eyebrow" data-i18n="projects.eyebrow">Trabajo aplicado</div>
+        <h2 data-i18n="projects.title">Proyectos</h2>
+      </div>
+      <a class="github-link" href="https://github.com/herreralazaro-source" target="_blank" rel="noopener" data-i18n="projects.github">VER GITHUB →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-head">
+        <div>
+          <h3 data-i18n="project1.title">File Permissions in Linux</h3>
+          <div class="cert-meta" data-i18n="project1.meta">Google Cybersecurity Certificate · Actividad de portfolio</div>
+        </div>
+        <span class="status-tag status-done" data-i18n="status.done">Completado</span>
+      </div>
+
+      <div class="project-body">
+        <p data-i18n="project1.desc">Revisé y actualicé los permisos de archivos y directorios dentro de un directorio de proyectos compartido, para alinearlos con los niveles de autorización correctos y reducir riesgos de acceso indebido.</p>
+        <div class="chip-row project-tools">
+          <span class="chip chip-tool">Linux</span>
+          <span class="chip chip-tool">chmod</span>
+          <span class="chip chip-tool">ls -al</span>
+        </div>
+        <a class="btn btn-primary" href="project-file-permissions.html" target="_blank" rel="noopener" data-i18n="project1.cta">Ver caso completo ↗</a>
+      </div>
+    </div>
+
+    <div class="project-card" style="margin-top: 18px;">
+      <div class="project-head">
+        <div>
+          <h3 data-i18n="project2.title">Applying Filters to SQL Queries</h3>
+          <div class="cert-meta" data-i18n="project2.meta">Google Cybersecurity Certificate · Actividad de portfolio</div>
+        </div>
+        <span class="status-tag status-done" data-i18n="status.done">Completado</span>
+      </div>
+
+      <div class="project-body">
+        <p data-i18n="project2.desc">Escribí seis consultas SQL para investigar incidentes de seguridad reales: inicios de sesión fallidos fuera de horario, actividad sospechosa por fecha y país, y filtrado de empleados por departamento y ubicación para coordinar actualizaciones de seguridad.</p>
+        <div class="chip-row project-tools">
+          <span class="chip chip-tool">SQL</span>
+          <span class="chip chip-tool">SELECT</span>
+          <span class="chip chip-tool">WHERE</span>
+        </div>
+        <a class="btn btn-primary" href="project-sql-filters.html" target="_blank" rel="noopener" data-i18n="project1.cta">Ver caso completo ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="homelab">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow" data-i18n="homelab.eyebrow">Práctica propia</div>
+      <h2 data-i18n="homelab.title">Home Lab</h2>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-head">
+        <div>
+          <h3 data-i18n="homelab.subtitle">Entorno de práctica personal</h3>
+          <div class="cert-meta" data-i18n="homelab.meta">VirtualBox · Kali Linux · Redes · Análisis de tráfico · Detección</div>
+        </div>
+        <span class="status-tag status-progress" data-i18n="status.progress">En curso</span>
+      </div>
+      <ul class="module-list">
+        <li><span data-i18n="homelab.item1">Configuración de VirtualBox + Kali Linux</span><span class="status-tag status-todo" data-i18n="status.pending">Pendiente</span></li>
+        <li><span data-i18n="homelab.item2">Análisis de tráfico de red con Wireshark</span><span class="status-tag status-todo" data-i18n="status.pending">Pendiente</span></li>
+        <li><span data-i18n="homelab.item3">Experimentos básicos de detección</span><span class="status-tag status-todo" data-i18n="status.pending">Pendiente</span></li>
+      </ul>
+      <p class="homelab-note" data-i18n="homelab.note">A medida que complete cada experimento, esta sección enlazará a su write-up técnico correspondiente.</p>
+    </div>
+  </div>
+</section>
+
+<section id="training">
   <div class="wrap">
     <div class="section-head">
       <div class="section-eyebrow" data-i18n="training.eyebrow">Formación en curso</div>
@@ -643,86 +833,6 @@
         <li><span><span class="module-num">08</span>Put It to Work: Prepare for Jobs</span><span class="status-tag status-todo" data-i18n="status.pending">Pendiente</span></li>
         <li><span><span class="module-num">09</span>Accelerate Your Job Search with AI</span><span class="status-tag status-todo" data-i18n="status.pending">Pendiente</span></li>
       </ul>
-    </div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="section-eyebrow" data-i18n="skills.eyebrow">Matriz de capacidades</div>
-      <h2 data-i18n="skills.title">Habilidades en desarrollo</h2>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <h4 data-i18n="skill1.title">Fundamentos de seguridad</h4>
-        <div class="skill-desc" data-i18n="skill1.desc">Tríada CIA, gestión de riesgos, marcos de referencia (NIST).</div>
-        <div class="level"><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="level-label" data-i18n="level.foundations">Fundamentos</span></div>
-      </div>
-      <div class="skill-card">
-        <h4 data-i18n="skill2.title">Redes y protocolos</h4>
-        <div class="skill-desc" data-i18n="skill2.desc">Modelo OSI/TCP-IP, firewalls, captura de paquetes con Wireshark.</div>
-        <div class="level"><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="level-label" data-i18n="level.foundations">Fundamentos</span></div>
-      </div>
-      <div class="skill-card">
-        <h4 data-i18n="skill3.title">Linux &amp; línea de comandos</h4>
-        <div class="skill-desc" data-i18n="skill3.desc">Navegación de sistema de archivos, permisos, gestión de procesos.</div>
-        <div class="level"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="level-label" data-i18n="level.starting">Iniciando</span></div>
-      </div>
-      <div class="skill-card">
-        <h4>SQL</h4>
-        <div class="skill-desc" data-i18n="skill4.desc">Consultas básicas para análisis de logs y auditoría de datos.</div>
-        <div class="level"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="level-label" data-i18n="level.starting">Iniciando</span></div>
-      </div>
-      <div class="skill-card">
-        <h4 data-i18n="skill5.title">Python para seguridad</h4>
-        <div class="skill-desc" data-i18n="skill5.desc">Automatización de tareas repetitivas de análisis y monitoreo.</div>
-        <div class="level"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="level-label" data-i18n="level.starting">Iniciando</span></div>
-      </div>
-      <div class="skill-card">
-        <h4 data-i18n="skill6.title">Detección y respuesta</h4>
-        <div class="skill-desc" data-i18n="skill6.desc">Conceptos de SIEM, identificación de eventos e indicadores de compromiso.</div>
-        <div class="level"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="level-label" data-i18n="level.starting">Iniciando</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="section-eyebrow" data-i18n="projects.eyebrow">Trabajo aplicado</div>
-      <h2 data-i18n="projects.title">Proyectos</h2>
-    </div>
-
-    <div class="project-card">
-      <div class="project-head">
-        <div>
-          <h3 data-i18n="project1.title">File Permissions in Linux</h3>
-          <div class="cert-meta" data-i18n="project1.meta">Google Cybersecurity Certificate · Actividad de portfolio</div>
-        </div>
-        <span class="status-tag status-done" data-i18n="status.done">Completado</span>
-      </div>
-
-      <div class="project-body">
-        <p data-i18n="project1.desc">Revisé y actualicé los permisos de archivos y directorios dentro de un directorio de proyectos compartido, para alinearlos con los niveles de autorización correctos y reducir riesgos de acceso indebido.</p>
-        <a class="btn btn-primary" href="project-file-permissions.html" target="_blank" rel="noopener" data-i18n="project1.cta">Ver caso completo ↗</a>
-      </div>
-    </div>
-
-    <div class="project-card" style="margin-top: 18px;">
-      <div class="project-head">
-        <div>
-          <h3 data-i18n="project2.title">Applying Filters to SQL Queries</h3>
-          <div class="cert-meta" data-i18n="project2.meta">Google Cybersecurity Certificate · Actividad de portfolio</div>
-        </div>
-        <span class="status-tag status-done" data-i18n="status.done">Completado</span>
-      </div>
-
-      <div class="project-body">
-        <p data-i18n="project2.desc">Escribí seis consultas SQL para investigar incidentes de seguridad reales: inicios de sesión fallidos fuera de horario, actividad sospechosa por fecha y país, y filtrado de empleados por departamento y ubicación para coordinar actualizaciones de seguridad.</p>
-        <a class="btn btn-primary" href="project-sql-filters.html" target="_blank" rel="noopener" data-i18n="project1.cta">Ver caso completo ↗</a>
-      </div>
     </div>
   </div>
 </section>
@@ -783,11 +893,12 @@
       <div class="contact-links">
         <a class="btn btn-primary" href="https://www.linkedin.com/in/lazaro-herrera-jimenez-83485b394/?skipRedirect=true" target="_blank" rel="noopener">LinkedIn ↗</a>
         <a class="btn btn-ghost" href="mailto:herrera.lazaro@gmail.com">herrera.lazaro@gmail.com</a>
-        <span class="soon-badge" data-i18n="contact.github.soon">GitHub — próximamente</span>
+        <a class="btn btn-ghost" href="https://github.com/herreralazaro-source" target="_blank" rel="noopener" data-i18n="contact.github">GitHub ↗</a>
       </div>
     </div>
   </div>
 </section>
+
 
 <footer data-i18n="footer.text">
   © 2026 LÁZARO HERRERA JIMÉNEZ — PORTFOLIO EN CONSTRUCCIÓN CONTINUA
@@ -796,7 +907,7 @@
 <script>
 const translations = {
   es: {
-    "nav.about":"Sobre mí","nav.training":"Formación","nav.skills":"Habilidades","nav.projects":"Proyectos","nav.roadmap":"Hoja de ruta","nav.contact":"Contacto","nav.status":"EN FORMACIÓN",
+    "nav.about":"Sobre mí","nav.skills":"Habilidades","nav.projects":"Proyectos","nav.homelab":"Home Lab","nav.training":"Formación","nav.roadmap":"Hoja de ruta","nav.contact":"Contacto","nav.status":"EN FORMACIÓN",
     "hero.eyebrow":"Registro de analista · Estado: activo","hero.role":"Analista de Ciberseguridad en Formación",
     "hero.p1":"Estoy construyendo mi base en ciberseguridad de forma metódica: redes, sistemas Linux, detección de incidentes y fundamentos de seguridad defensiva. No vengo con años de experiencia — vengo con constancia, curiosidad técnica y la disciplina de documentar cada cosa que aprendo.",
     "hero.p2":"Este portfolio es, en sí mismo, parte de ese proceso: un registro vivo de mi formación que se irá actualizando módulo a módulo, laboratorio a laboratorio.",
@@ -810,8 +921,15 @@ const translations = {
     "about.p3":"Antes de dar el salto a ciberseguridad, pasé 8 años como técnico de producción en Intel — un puesto al que entré sin ninguna titulación formal, en un entorno de manufactura de alta precisión donde el cumplimiento estricto de protocolos y la atención al detalle no son opcionales. Esa misma disciplina operativa, y la experiencia de haber construido una trayectoria sólida partiendo de cero, es lo que ahora aplico a mi formación en ciberseguridad.",
     "training.eyebrow":"Formación en curso","training.subtitle":"Programa de 9 módulos — Coursera / Google","training.focus":"Enfoque: fundamentos de seguridad defensiva (Blue Team)","training.statustag":"EN CURSO",
     "status.done":"Completado","status.progress":"En curso","status.pending":"Pendiente",
-    "skills.eyebrow":"Matriz de capacidades","skills.title":"Habilidades en desarrollo",
-    "projects.eyebrow":"Trabajo aplicado","projects.title":"Proyectos",
+    "currently.label":"ACTUALMENTE","currently.items":"Google Cybersecurity Professional Certificate · SQL · Linux · Redes",
+    "skills.eyebrow":"Capacidades","skills.title":"Habilidades y herramientas",
+    "skills.subhead":"Habilidades","tools.subhead":"Herramientas","tools.note":"Se irán agregando a medida que las use en laboratorios y proyectos reales.",
+    "skill.netsec":"Seguridad de redes","skill.ir":"Respuesta a incidentes","skill.threatdet":"Detección de amenazas","skill.networking":"Redes",
+    "projects.eyebrow":"Trabajo aplicado","projects.title":"Proyectos","projects.github":"VER GITHUB →",
+    "homelab.eyebrow":"Práctica propia","homelab.title":"Home Lab",
+    "homelab.subtitle":"Entorno de práctica personal","homelab.meta":"VirtualBox · Kali Linux · Redes · Análisis de tráfico · Detección",
+    "homelab.item1":"Configuración de VirtualBox + Kali Linux","homelab.item2":"Análisis de tráfico de red con Wireshark","homelab.item3":"Experimentos básicos de detección",
+    "homelab.note":"A medida que complete cada experimento, esta sección enlazará a su write-up técnico correspondiente.",
     "project1.title":"File Permissions in Linux","project1.meta":"Google Cybersecurity Certificate · Actividad de portfolio",
     "project1.desc":"Revisé y actualicé los permisos de archivos y directorios dentro de un directorio de proyectos compartido, para alinearlos con los niveles de autorización correctos y reducir riesgos de acceso indebido.",
     "project1.cta":"Ver caso completo ↗",
@@ -834,12 +952,13 @@ const translations = {
     "roadmap.item6.h4":"CompTIA Security+","roadmap.item6.p":"Prepararla una vez tenga una base sólida del certificado, los laboratorios y TryHackMe.",
     "roadmap.item7.h4":"Elegir una especialización","roadmap.item7.p":"Decidir entre SOC / Blue Team, pentesting, seguridad en la nube u otro camino — según la experiencia práctica acumulada.",
     "contact.title":"Hablemos.","contact.p":"Abierto a oportunidades junior en ciberseguridad — SOC, análisis de seguridad o roles de entrada al sector.",
+    "contact.github":"GitHub ↗",
     "contact.github.soon":"GitHub — próximamente",
     "panel.label.updated":"Última actualización","panel.value.updated":"Julio 2026",
     "footer.text":"© 2026 LÁZARO HERRERA JIMÉNEZ — PORTFOLIO EN CONSTRUCCIÓN CONTINUA"
   },
   en: {
-    "nav.about":"About","nav.training":"Training","nav.skills":"Skills","nav.projects":"Projects","nav.roadmap":"Roadmap","nav.contact":"Contact","nav.status":"IN TRAINING",
+    "nav.about":"About","nav.skills":"Skills","nav.projects":"Projects","nav.homelab":"Home Lab","nav.training":"Training","nav.roadmap":"Roadmap","nav.contact":"Contact","nav.status":"IN TRAINING",
     "hero.eyebrow":"Analyst log · Status: active","hero.role":"Cybersecurity Analyst in Training",
     "hero.p1":"I'm building my foundation in cybersecurity methodically: networking, Linux systems, incident detection, and defensive security fundamentals. I don't come with years of experience — I come with consistency, technical curiosity, and the discipline to document everything I learn.",
     "hero.p2":"This portfolio is, in itself, part of that process: a living record of my training that keeps updating module by module, lab by lab.",
@@ -853,8 +972,15 @@ const translations = {
     "about.p3":"Before making the jump to cybersecurity, I spent 8 years as a production technician at Intel — a role I entered with no formal qualifications, in a high-precision manufacturing environment where strict protocol compliance and attention to detail aren't optional. That same operational discipline, and the experience of building a solid track record starting from zero, is exactly what I now bring to my cybersecurity training.",
     "training.eyebrow":"Current training","training.subtitle":"9-module program — Coursera / Google","training.focus":"Focus: defensive security fundamentals (Blue Team)","training.statustag":"IN PROGRESS",
     "status.done":"Completed","status.progress":"In progress","status.pending":"Pending",
-    "skills.eyebrow":"Capability matrix","skills.title":"Skills in development",
-    "projects.eyebrow":"Applied work","projects.title":"Projects",
+    "currently.label":"CURRENTLY","currently.items":"Google Cybersecurity Professional Certificate · SQL · Linux · Networking",
+    "skills.eyebrow":"Capabilities","skills.title":"Skills &amp; tools",
+    "skills.subhead":"Skills","tools.subhead":"Tools","tools.note":"More will be added as I use them in labs and real projects.",
+    "skill.netsec":"Network Security","skill.ir":"Incident Response","skill.threatdet":"Threat Detection","skill.networking":"Networking",
+    "projects.eyebrow":"Applied work","projects.title":"Projects","projects.github":"VIEW GITHUB →",
+    "homelab.eyebrow":"Hands-on practice","homelab.title":"Home Lab",
+    "homelab.subtitle":"Personal practice environment","homelab.meta":"VirtualBox · Kali Linux · Networking · Traffic analysis · Detection",
+    "homelab.item1":"Set up VirtualBox + Kali Linux","homelab.item2":"Analyze network traffic with Wireshark","homelab.item3":"Basic detection experiments",
+    "homelab.note":"As each experiment is completed, this section will link to its corresponding technical write-up.",
     "project1.title":"File Permissions in Linux","project1.meta":"Google Cybersecurity Certificate · Portfolio activity",
     "project1.desc":"I reviewed and updated file and directory permissions within a shared projects directory, to align them with the correct authorization levels and reduce the risk of improper access.",
     "project1.cta":"View full case study ↗",
@@ -877,12 +1003,13 @@ const translations = {
     "roadmap.item6.h4":"CompTIA Security+","roadmap.item6.p":"Pursue this industry certification once I have a solid foundation from the certificate, labs, and TryHackMe.",
     "roadmap.item7.h4":"Choose a specialization","roadmap.item7.p":"Decide between SOC / Blue Team, penetration testing, cloud security, or another path — based on hands-on experience.",
     "contact.title":"Let's talk.","contact.p":"Open to junior cybersecurity opportunities — SOC, security analysis, or entry-level roles in the field.",
+    "contact.github":"GitHub ↗",
     "contact.github.soon":"GitHub — coming soon",
     "panel.label.updated":"Last updated","panel.value.updated":"July 2026",
     "footer.text":"© 2026 LÁZARO HERRERA JIMÉNEZ — PORTFOLIO UNDER CONTINUOUS CONSTRUCTION"
   },
   he: {
-    "nav.about":"אודותיי","nav.training":"הכשרה","nav.skills":"כישורים","nav.projects":"פרויקטים","nav.roadmap":"מפת דרכים","nav.contact":"יצירת קשר","nav.status":"בהכשרה",
+    "nav.about":"אודותיי","nav.skills":"כישורים","nav.projects":"פרויקטים","nav.homelab":"מעבדה ביתית","nav.training":"הכשרה","nav.roadmap":"מפת דרכים","nav.contact":"יצירת קשר","nav.status":"בהכשרה",
     "hero.eyebrow":"יומן אנליסט · סטטוס: פעיל","hero.role":"אנליסט אבטחת סייבר בהכשרה",
     "hero.p1":"אני בונה את הבסיס שלי בתחום אבטחת הסייבר בצורה שיטתית: רשתות, מערכות לינוקס, זיהוי אירועים ויסודות אבטחה הגנתית. אין לי שנות ניסיון — יש לי עקביות, סקרנות טכנית ומשמעת לתעד כל דבר שאני לומד.",
     "hero.p2":"התיק הזה הוא בעצמו חלק מהתהליך: תיעוד חי של ההכשרה שלי, שמתעדכן מודול אחרי מודול, מעבדה אחרי מעבדה.",
@@ -896,8 +1023,15 @@ const translations = {
     "about.p3":"לפני המעבר לעולם אבטחת הסייבר, עבדתי 8 שנים כטכנאי ייצור באינטל — תפקיד שנכנסתי אליו ללא כל תואר או הסמכה פורמלית, בסביבת ייצור בדיוק גבוה שבה עמידה קפדנית בנהלים ותשומת לב לפרטים אינם אופציונליים. אותה משמעת תפעולית, יחד עם הניסיון של בניית מסלול קריירה יציב מאפס, הם בדיוק מה שאני מביא כעת להכשרה שלי בתחום אבטחת הסייבר.",
     "training.eyebrow":"הכשרה נוכחית","training.subtitle":"תוכנית בת 9 מודולים — Coursera / Google","training.focus":"התמחות: יסודות אבטחה הגנתית (Blue Team)","training.statustag":"בתהליך",
     "status.done":"הושלם","status.progress":"בתהליך","status.pending":"טרם החל",
-    "skills.eyebrow":"מטריצת יכולות","skills.title":"כישורים בפיתוח",
-    "projects.eyebrow":"עבודה מעשית","projects.title":"פרויקטים",
+    "currently.label":"כרגע","currently.items":"Google Cybersecurity Professional Certificate · SQL · Linux · רשתות",
+    "skills.eyebrow":"יכולות","skills.title":"כישורים וכלים",
+    "skills.subhead":"כישורים","tools.subhead":"כלים","tools.note":"עוד כלים יתווספו ככל שאשתמש בהם במעבדות ובפרויקטים אמיתיים.",
+    "skill.netsec":"אבטחת רשתות","skill.ir":"תגובה לאירועים","skill.threatdet":"זיהוי איומים","skill.networking":"רשתות",
+    "projects.eyebrow":"עבודה מעשית","projects.title":"פרויקטים","projects.github":"← צפייה ב-GitHub",
+    "homelab.eyebrow":"תרגול עצמאי","homelab.title":"Home Lab",
+    "homelab.subtitle":"סביבת תרגול אישית","homelab.meta":"VirtualBox · Kali Linux · רשתות · ניתוח תעבורה · זיהוי",
+    "homelab.item1":"הקמת VirtualBox + Kali Linux","homelab.item2":"ניתוח תעבורת רשת עם Wireshark","homelab.item3":"ניסויי זיהוי בסיסיים",
+    "homelab.note":"עם השלמת כל ניסוי, הסעיף הזה יקשר למאמר הטכני המתאים.",
     "project1.title":"File Permissions in Linux","project1.meta":"Google Cybersecurity Certificate · פעילות תיק עבודות",
     "project1.desc":"בדקתי ועדכנתי הרשאות של קבצים ותיקיות בתוך תיקיית פרויקטים משותפת, כדי להתאים אותן לרמות ההרשאה הנכונות ולצמצם סיכון לגישה לא מורשית.",
     "project1.cta":"לצפייה במקרה המלא ↗",
@@ -920,6 +1054,7 @@ const translations = {
     "roadmap.item6.h4":"CompTIA Security+","roadmap.item6.p":"להתכונן להסמכה זו לאחר בניית בסיס איתן מהתעודה, המעבדות ו-TryHackMe.",
     "roadmap.item7.h4":"בחירת התמחות","roadmap.item7.p":"להחליט בין SOC / Blue Team, בדיקות חדירה, אבטחת ענן, או כיוון אחר — בהתבסס על ניסיון מעשי.",
     "contact.title":"בואו נדבר.","contact.p":"פתוח להזדמנויות ג'וניור בתחום אבטחת הסייבר — SOC, ניתוח אבטחה, או תפקידי כניסה לתחום.",
+    "contact.github":"← GitHub",
     "contact.github.soon":"GitHub — בקרוב",
     "panel.label.updated":"עדכון אחרון","panel.value.updated":"יולי 2026",
     "footer.text":"© 2026 לזארו הררה חימנס — תיק עבודות בבנייה מתמדת"
